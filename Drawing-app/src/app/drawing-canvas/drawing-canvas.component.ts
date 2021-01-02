@@ -8,34 +8,28 @@ import Konva from 'node_modules/konva';
 })
 export class DrawingCanvasComponent implements OnInit {
 
-  title = 'canvas';
-  constructor() { }
-
   ngOnInit(): void {
-    console.log('added',document.getElementById('Drawing-canvas'));
   }
 
 }
 
 export function activateSquare() {
-  console.log('yes');
-  let canvas = document.getElementById('Drawing-canvas');
-  if(canvas) {
-    canvas.addEventListener('click',function(e){
-      let square = document.createElement('div');
-      square.id = 'Square';
-      square.style.position = 'absolute';
-      square.style.top = JSON.stringify(e.pageY);
-      square.style.left = JSON.stringify(e.pageX);
-      canvas.append(square);
 
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+  let canvas = document.getElementById('Drawing-canvas');
+
+  if(canvas) {
+    canvas.addEventListener('mousedown',function(e){
+      e.preventDefault();
+      let square = document.createElement('div');
+      canvas.append(square);
+      square.style.position = 'absolute';
+      square.style.top = e.clientY - 50 + 'px';
+      square.style.left = e.clientX + 'px';
   
       const stage = new Konva.Stage({
-        container: 'Square',
-        width: width,
-        height: height,
+        container: square,
+        width: 100,
+        height: 100,
       });
   
       const layer = new Konva.Layer();
@@ -45,14 +39,12 @@ export function activateSquare() {
         y: 0,
         width: 50,
         height: 50,
-        fill: 'green',
+        fill: 'aqua',
         stroke: 'black',
         strokeWidth: 4,
       });
-      // add the shape to the layer
+
       layer.add(rect1);
-  
-      // add the layer to the stage
       stage.add(layer);
     })
   }

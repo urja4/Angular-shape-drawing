@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  title = 'Toolbar'
+  title = 'Shapes'
 
   ngOnInit(): void {
   }

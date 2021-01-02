@@ -9,16 +9,12 @@ import { activateSquare } from '../drawing-canvas/drawing-canvas.component';
 })
 export class ShapesComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
 
     const stage = new Konva.Stage({
       container: 'Shape',
-      width: width,
-      height: height,
+      width: 100,
+      height: 100,
     });
 
     const layer = new Konva.Layer();
@@ -26,20 +22,17 @@ export class ShapesComponent implements OnInit {
     const rect1 = new Konva.Rect({
       x: 0,
       y: 0,
-      width: 50,
-      height: 50,
-      fill: 'green',
+      width: 100,
+      height: 1000,
+      fill: 'aqua',
       stroke: 'black',
-      strokeWidth: 4,
+      strokeWidth: 6,
     });
-    // add the shape to the layer
     layer.add(rect1);
-
-    // add the layer to the stage
     stage.add(layer);
 
-    rect1.addEventListener('click',function(){
-      console.log(rect1);
+    rect1.addEventListener('click',function(e){
+      e.preventDefault();
       activateSquare();
     });
   }
